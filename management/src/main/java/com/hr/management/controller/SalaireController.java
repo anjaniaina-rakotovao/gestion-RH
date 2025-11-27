@@ -124,7 +124,7 @@ public class SalaireController {
             @PathVariable int mois,
             @PathVariable int annee) {
 
-        BigDecimal cnaps = salaireService.getCnapsUnPercent(idEmploye, mois, annee);
+        BigDecimal cnaps = salaireService.getCnapsPercent(idEmploye, mois, annee);
 
         return cnaps;
     }
@@ -135,7 +135,7 @@ public class SalaireController {
             @PathVariable int mois,
             @PathVariable int annee) {
 
-        BigDecimal ostie = salaireService.getOstieUnPercent(idEmploye, mois, annee);
+        BigDecimal ostie = salaireService.getOstiePercent(idEmploye, mois, annee);
 
         return ostie;
     }
@@ -157,8 +157,8 @@ public class SalaireController {
             @PathVariable int mois,
             @PathVariable int annee) {
 
-        BigDecimal cnaps = salaireService.getCnapsUnPercent(idEmploye, mois, annee);
-        BigDecimal ostie = salaireService.getOstieUnPercent(idEmploye, mois, annee);
+        BigDecimal cnaps = salaireService.getCnapsPercent(idEmploye, mois, annee);
+        BigDecimal ostie = salaireService.getOstiePercent(idEmploye, mois, annee);
         BigDecimal salaireNet = salaireService.getSalaireNet(idEmploye, mois, annee);
 
         return new OstieCnapsSalaireNetDTO(cnaps, ostie, salaireNet, idEmploye);
