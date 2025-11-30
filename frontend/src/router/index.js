@@ -14,6 +14,8 @@ import PresenceList from "../views/PresenceList.vue";
 import DemandeConge from "../views/DemandeConge.vue";
 import PendingLeaves from "../views/PendingLeaves.vue";
 import ScoringPage from '@/pages/ScoringPage.vue';
+import GenererRapport from '@/pages/GenererRapport.vue';
+import Competence from '@/pages/Competence.vue';
 
 const routes = [
     {
@@ -73,6 +75,17 @@ const routes = [
         path: '/scoringPage',
         name: 'ScoringPage',
         component: ScoringPage,
+    },
+
+    {
+        path: '/genererRapport',
+        name: 'GenererRapport',
+        component: GenererRapport,
+    },
+       {
+        path: '/competence',
+        name: 'Competence',
+        component: Competence,
     },
     { path: "/home", name: "home", component: Home },
     { path: "/dashboard", name: "dashboard", component: Dashboard },
