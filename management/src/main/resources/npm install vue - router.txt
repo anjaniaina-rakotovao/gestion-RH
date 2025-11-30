@@ -1,6 +1,7 @@
 npm install vue - router
 nmp install axios
 npm install chart.js
+npm install @fullcalendar/vue3 @fullcalendar/core @fullcalendar/daygrid 
 
 
 UPDATE employe_poste

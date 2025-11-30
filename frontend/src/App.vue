@@ -99,6 +99,23 @@ export default {
           <span class="nav-icon">⏲️</span>
           <span class="nav-text" v-if="!sidebarCollapsed">Liste congés en attente</span>
         </router-link>
+
+        <router-link to="/scoringPage" class="nav-link" :class="{ active: $route.path === '/scoringPage' }">
+          <span class="nav-icon">⏲️</span>
+          <span class="nav-text" v-if="!sidebarCollapsed">Gestion des performances</span>
+        </router-link>
+
+          <router-link to="/genererRapport" class="nav-link" :class="{ active: $route.path === '/genererRapport' }">
+          <span class="nav-icon">⏲️</span>
+          <span class="nav-text" v-if="!sidebarCollapsed">Générer Rapport</span>
+        </router-link>
+
+         <router-link to="/competence" class="nav-link" :class="{ active: $route.path === '/competence' }">
+          <span class="nav-icon">⏲️</span>
+          <span class="nav-text" v-if="!sidebarCollapsed">Gestion Compétences</span>
+        </router-link>
+
+        
       </div>
 
       <div class="sidebar-footer" v-if="!sidebarCollapsed">
