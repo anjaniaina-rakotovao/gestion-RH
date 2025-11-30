@@ -1,10 +1,17 @@
 package com.hr.management.entities;
 
-import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "employe")
@@ -49,6 +56,10 @@ public class Employe {
     @OneToMany(mappedBy = "employe")
     @JsonIgnore
     private List<Conge> conges;
+
+    @OneToMany(mappedBy = "employe")
+    @JsonIgnore
+    private List<Ticket> ticket;
 
     @OneToMany(mappedBy = "employe")
     @JsonIgnore
@@ -205,6 +216,14 @@ public class Employe {
 
     public void setHistoSalaires(List<HistoSalaire> histoSalaires) {
         this.histoSalaires = histoSalaires;
+    }
+
+    public List<Ticket> getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(List<Ticket> ticket) {
+        this.ticket = ticket;
     }
 
 }

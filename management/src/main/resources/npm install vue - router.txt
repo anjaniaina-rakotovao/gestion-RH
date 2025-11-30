@@ -1,0 +1,55 @@
+npm install vue - router
+nmp install axios
+npm install chart.js
+
+
+UPDATE employe_poste
+SET date_fin = NULL
+WHERE id_employe = 'EMP003';
+
+
+ Évaluations périodiques automatisées (scoring) 
+ Génération de rapports de performance 
+
+
+scoring
+Score_Productivité = (Nombre de tickets fermés / Tickets assignés) * 10
+
+Score_Efficacité = (Durée estimée totale / Durée réelle totale) * 10
+
+Score_Qualité = (10 - (Tickets_rejetés / Tickets_terminés * 10))
+
+------------------------------------------------------------------------
+système de matching
+
+Compétence	Niveau requis	Niveau de Maria	Écart
+Gestion de projet	4/5	3/5	-1
+Word	3/5	4/5	+1
+Salesforce	3/5	2/5	-1
+Anglais	4/5	4/5	0
+
+-------------------------------------------------------------------------
+
+COMPÉTENCES TECHNIQUES (DÉVELOPPEMENT)
+✅ Python       : 25 experts (↑ 15% vs 2023)
+✅ JavaScript   : 40 collaborateurs (niveau moyen: 3.8/5)
+⚠️  IA/ML       : 5 experts seulement (RISQUE identifié)
+❌ Blockchain   : Compétence manquante
+
+COMPÉTENCES MÉTIERS
+✅ Salesforce   : 65% des commerciaux certifiés
+✅ Gestion projet : 12 PMP certifiés
+⚠️  Data Analysis : Besoin de formation urgent
+
+COMPÉTENCES LINGUISTIQUES
+✅ Anglais      : 80% niveau courant ou +
+⚠️  Espagnol    : Seulement 15% (limite expansion Amérique Sud)
+
+-------------------------------------------------------------------------
+
+Compétence        | Niveau moyen | Taux de couverture
+---------------------------------------------------
+Python           | 🟢🟢🟢🟢⚪ (4.2/5) | 45% des devs
+Salesforce       | 🟡🟡🟡⚪⚪ (3.1/5) | 30% des commerciaux
+Gestion de projet| 🟢🟢🟢🟢🟢 (4.8/5) | 25% de l'effectif
+Anglais technique| 🟡🟡⚪⚪⚪ (2.4/5) | 60% des équipes
