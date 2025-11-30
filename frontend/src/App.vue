@@ -99,6 +99,11 @@ export default {
           <span class="nav-icon">⏲️</span>
           <span class="nav-text" v-if="!sidebarCollapsed">Liste congés en attente</span>
         </router-link>
+
+        <router-link to="/scoringPage" class="nav-link" :class="{ active: $route.path === '/scoringPage' }">
+          <span class="nav-icon">⏲️</span>
+          <span class="nav-text" v-if="!sidebarCollapsed">Gestion des performances</span>
+        </router-link>
       </div>
 
       <div class="sidebar-footer" v-if="!sidebarCollapsed">

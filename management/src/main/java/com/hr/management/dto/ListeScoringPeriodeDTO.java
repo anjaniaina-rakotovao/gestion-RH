@@ -30,11 +30,17 @@ public class ListeScoringPeriodeDTO {
     public void setListeScoringPeriode(List<ScoringTicketDTO> listeScoringPeriode){
         this.listeScoringPeriode = listeScoringPeriode;
     }
-
-    public long getScore(String string) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getScore'");
+public long getScore(String nom) {
+    if (listeScoringPeriode == null) {
+        return 0L;
     }
+
+    return listeScoringPeriode.stream()
+            .filter(s -> s.getNom().equalsIgnoreCase(nom)) // on filtre sur le nom
+            .mapToLong(s -> s.getScore() != null ? s.getScore().longValue() : 0L) // conversion BigDecimal -> long
+            .sum();
+}
+
 
 
 }
