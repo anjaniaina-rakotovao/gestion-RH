@@ -16,6 +16,7 @@ import PendingLeaves from "../views/PendingLeaves.vue";
 import ScoringPage from '@/pages/ScoringPage.vue';
 import GenererRapport from '@/pages/GenererRapport.vue';
 import Competence from '@/pages/Competence.vue';
+import RechercheCompetence from '@/pages/RechercheCompetence.vue'
 
 const routes = [
     {
@@ -87,6 +88,13 @@ const routes = [
         name: 'Competence',
         component: Competence,
     },
+
+    {
+        path: '/rechercheCompetence',
+        name: 'RechercheCompetence',
+        component: RechercheCompetence, 
+    },
+    
     { path: "/home", name: "home", component: Home },
     { path: "/dashboard", name: "dashboard", component: Dashboard },
     { path: "/presences", name: "presences", component: PresenceList },
