@@ -1,144 +1,169 @@
 <template>
-  <div class="p-6 max-w-xl mx-auto">
-    <h1 class="text-2xl font-bold mb-4">Générer un rapport de performance</h1>
+    <Navbar />
 
-    <!-- Champ Employé avec autocomplete -->
-    <div class="mb-4 relative">
-      <label class="font-semibold mr-2">Employé :</label>
-      <input
-        type="text"
-        v-model="search"
-        @input="searchEmployes"
-        placeholder="Tapez le nom, prénom ou ID"
-        class="border px-2 py-1 rounded w-full"
-        autocomplete="off"
-      />
-      <ul v-if="suggestions.length" class="absolute border bg-white w-full mt-1 max-h-48 overflow-auto z-10">
-        <li
-          v-for="emp in suggestions"
-          :key="emp.idEmploye"
-          @click="selectEmploye(emp)"
-          class="px-2 py-1 hover:bg-gray-200 cursor-pointer flex items-center gap-2"
-        >
-          <img :src="emp.imagePath" alt="Profil" class="w-6 h-6 rounded-full object-cover" />
-          {{ emp.prenom }} {{ emp.nom }} ({{ emp.idEmploye }})
-        </li>
-      </ul>
-    </div>
+  <div class="container">
 
-    <!-- Sélecteur mois/année -->
-    <div class="mb-4 flex gap-4">
-      <div>
-        <label class="font-semibold mr-2">Mois :</label>
-        <select v-model.number="month" class="border px-2 py-1 rounded">
-          <option v-for="m in 12" :key="m" :value="m">{{ m }}</option>
-        </select>
-      </div>
-      <div>
-        <label class="font-semibold mr-2">Année :</label>
-        <input type="number" v-model.number="year" min="2000" max="2100" class="border px-2 py-1 rounded" />
-      </div>
-    </div>
+    <h2 class="title">📄 Générer rapport de performance</h2>
 
-    <div class="mb-4">
-      <label class="font-semibold mr-2">Commentaire :</label>
-      <input type="text" v-model="commentaire" placeholder="Commentaire (optionnel)" class="border px-2 py-1 rounded w-full" />
-    </div>
-
-    <button @click="genererRapport" class="bg-blue-500 text-white px-4 py-2 rounded mb-4">Générer le rapport</button>
-
-    <!-- Affichage du rapport -->
-    <div v-if="rapport" class="mt-6 p-4 border rounded bg-white shadow">
-      <h2 class="text-xl font-semibold mb-2">Rapport généré</h2>
-      
-      <div class="flex items-center gap-4 mb-2">
-        <img :src="rapport.employe.imagePath" alt="Profil" class="w-12 h-12 rounded-full object-cover" />
-        <p><strong>Employé :</strong> {{ rapport.employe.prenom }} {{ rapport.employe.nom }}</p>
+    <!-- FORMULAIRE -->
+    <div class="card">
+      <div class="form-row">
+        <label>ID Employé</label>
+        <input v-model="idEmploye" placeholder="Ex : EMP001" />
       </div>
 
-      <p><strong>Période :</strong> {{ rapport.periode }}</p>
-      <p><strong>Score Productivité :</strong> {{ rapport.scoreProductivite }}</p>
-      <p><strong>Score Efficacité :</strong> {{ rapport.scoreEfficacite }}</p>
-      <p><strong>Score Qualité :</strong> {{ rapport.scoreQualite }}</p>
-      <p v-if="rapport.commentaire"><strong>Commentaire :</strong> {{ rapport.commentaire }}</p>
-      <p><strong>Date génération :</strong> {{ rapport.dateGeneration }}</p>
+      <div class="form-row">
+        <label>Mois</label>
+        <input v-model="month" type="number" min="1" max="12" placeholder="1 - 12" />
+      </div>
 
-      <button @click="downloadPDF" class="bg-green-500 text-white px-4 py-2 rounded mt-4">Télécharger PDF</button>
+      <div class="form-row">
+        <label>Année</label>
+        <input v-model="year" type="number" placeholder="2025" />
+      </div>
+
+      <div class="form-row">
+        <label>Commentaire</label>
+        <textarea v-model="commentaire" placeholder="(optionnel)"></textarea>
+      </div>
+
+      <button class="btn" @click="genererRapport">Générer</button>
+
+      <p class="message">{{ message }}</p>
     </div>
-  </div>
+
+   <!-- RESULTATS RAPPORT -->
+   <div v-if="rapport" class="rapport-card">
+
+      <h3 class="rapport-title">📘 Rapport généré</h3>
+
+      <div class="profil-row">
+        <img v-if="rapport.employe.imagePath" :src="rapport.employe.imagePath" :alt="`${rapport.employe.prenom} ${rapport.employe.nom}`" class="profil-img" />
+        <div>
+          <h4>{{ rapport.employe.prenom }} {{ rapport.employe.nom }}</h4>
+          <p class="periode">📅 Période : {{ rapport.periode }}</p>
+          <p class="small-info">🆔 ID Rapport : {{ rapport.idRapport }}</p>
+        </div>
+      </div>
+
+      <!-- Infos employé -->
+      <div class="info-grid">
+        <div><strong>Sexe :</strong> {{ rapport.employe.sexe.libelle }}</div>
+        <div><strong>Contact :</strong> {{ rapport.employe.contact }}</div>
+        <div><strong>Email :</strong> {{ rapport.employe.mail }}</div>
+        <div><strong>Adresse :</strong> {{ rapport.employe.adresse }}</div>
+        <div><strong>Date de naissance :</strong> {{ rapport.employe.dateNaissance }}</div>
+      </div>
+
+      <!-- KPI -->
+      <div class="kpi-grid">
+        <div class="kpi-item">
+          <h5>Productivité</h5>
+          <p>{{ rapport.scoreProductivite }}</p>
+        </div>
+        <div class="kpi-item">
+          <h5>Efficacité</h5>
+          <p>{{ rapport.scoreEfficacite }}</p>
+        </div>
+        <div class="kpi-item">
+          <h5>Qualité</h5>
+          <p>{{ rapport.scoreQualite }}</p>
+        </div>
+      </div>
+
+      <!-- Commentaire -->
+      <div class="comment-section" v-if="rapport.commentaire">
+        <h5>Commentaire</h5>
+        <p>{{ rapport.commentaire }}</p>
+      </div>
+
+      <p class="generated-date">
+        🕒 Généré le : {{ rapport.dateGeneration }}
+      </p>
+
+      <!-- SUGGESTIONS DE FORMATION -->
+      <div v-if="suggestions.length" class="suggestion-card">
+        <h3 class="rapport-title">💡 Suggestions de formation</h3>
+        <ul>
+          <li v-for="f in suggestions" :key="f.idFormation">
+            <strong>{{ f.titre }}</strong> ({{ f.dureeHeures }} h) - {{ f.description }}
+          </li>
+        </ul>
+      </div>
+
+   </div>
+</div>   
+
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import axios from 'axios'
-import jsPDF from 'jspdf'
+import { ref } from "vue";
+import axios from "axios";
+import Navbar from "@/pages/NavBarCompetence.vue"; 
 
-const search = ref('')
-const suggestions = ref([])
-const idEmploye = ref('')
-const month = ref(new Date().getMonth() + 1)
-const year = ref(new Date().getFullYear())
-const commentaire = ref('')
-const rapport = ref(null)
+const idEmploye = ref("");
+const month = ref("");
+const year = ref("");
+const commentaire = ref("");
+const message = ref("");
+const rapport = ref(null);
+const suggestions = ref([]);
 
-// Rechercher tous les employés (endpoint global)
-const searchEmployes = async () => {
-  if (!search.value) {
-    suggestions.value = []
-    return
-  }
-  try {
-    const res = await axios.get(`http://localhost:8085/api/employes`) // TOUS les employés
-    suggestions.value = res.data.filter(emp =>
-      emp.nom.toLowerCase().includes(search.value.toLowerCase()) ||
-      emp.prenom.toLowerCase().includes(search.value.toLowerCase()) ||
-      emp.idEmploye.toLowerCase().includes(search.value.toLowerCase())
-    )
-  } catch (err) {
-    console.error(err)
-  }
-}
-
-const selectEmploye = (emp) => {
-  idEmploye.value = emp.idEmploye
-  search.value = `${emp.prenom} ${emp.nom}`
-  suggestions.value = []
-}
-
-// Générer le rapport
 const genererRapport = async () => {
-  if (!idEmploye.value) return alert('Veuillez sélectionner un employé')
-  try {
-    const res = await axios.post(`http://localhost:8085/api/rapport/generer`, null, {
-      params: { idEmploye: idEmploye.value, month: month.value, year: year.value, commentaire: commentaire.value || null }
-    })
-    rapport.value = res.data
-  } catch (err) {
-    console.error(err)
-    alert('Impossible de générer le rapport')
+  if (!idEmploye.value || !month.value || !year.value) {
+    message.value = "Veuillez remplir tous les champs obligatoires.";
+    return;
   }
-}
 
-// Télécharger le rapport en PDF
-const downloadPDF = () => {
-  if (!rapport.value) return
-  const doc = new jsPDF()
-  doc.setFontSize(16)
-  doc.text(`Rapport de performance - ${rapport.value.periode}`, 10, 20)
-  doc.setFontSize(12)
-  doc.text(`Employé : ${rapport.value.employe.prenom} ${rapport.value.employe.nom}`, 10, 30)
-  doc.text(`Score Productivité : ${rapport.value.scoreProductivite}`, 10, 40)
-  doc.text(`Score Efficacité : ${rapport.value.scoreEfficacite}`, 10, 50)
-  doc.text(`Score Qualité : ${rapport.value.scoreQualite}`, 10, 60)
-  if (rapport.value.commentaire) doc.text(`Commentaire : ${rapport.value.commentaire}`, 10, 70)
-  doc.text(`Date génération : ${rapport.value.dateGeneration}`, 10, 80)
-  doc.save(`rapport_${rapport.value.employe.idEmploye}_${rapport.value.periode}.pdf`)
-}
+  try {
+    // Génération du rapport
+    const res = await axios.post(
+      "http://localhost:8085/api/rapport/generer",
+      null,
+      {
+        params: {
+          idEmploye: idEmploye.value,
+          month: month.value,
+          year: year.value,
+          commentaire: commentaire.value || null,
+        },
+      }
+    );
+
+    rapport.value = res.data;
+    message.value = "Rapport généré avec succès !";
+
+    // Récupérer les suggestions pour cet employé et poste
+    const posteCode = "P-DEVJR"; // ou à adapter dynamiquement
+    const suggRes = await axios.get(`http://localhost:8085/api/competence/suggest/${idEmploye.value}/${posteCode}`);
+    suggestions.value = suggRes.data;
+
+  } catch (error) {
+    console.error(error);
+    message.value = "Erreur lors de la génération.";
+  }
+};
 </script>
 
 <style scoped>
-ul { list-style: none; padding: 0; margin: 0; }
-li { cursor: pointer; padding: 4px 8px; display: flex; align-items: center; gap: 4px; }
-li:hover { background: #f0f0f0; }
-img { object-fit: cover; }
+.container { width: 70%; margin: auto; padding: 20px; } .title { text-align: center; margin-bottom: 25px; font-size: 26px; font-weight: bold; } /*** FORMULAIRE ***/ .card { background: #ffffff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-bottom: 25px; } .form-row { margin-bottom: 15px; display: flex; flex-direction: column; } .form-row label { font-weight: bold; margin-bottom: 5px; } input, textarea { width: 100%; padding: 8px 10px; border-radius: 6px; border: 1px solid #ccc; } .btn { width: 100%; padding: 12px; background: #2a7ae4; color: white; font-size: 16px; border-radius: 8px; cursor: pointer; margin-top: 10px; } .btn:hover { background: #1d5ebd; } .message { margin-top: 10px; font-weight: bold; text-align: center; } /*** RAPPORT ***/ .rapport-card { background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); } .rapport-title { text-align: center; margin-bottom: 15px; } .profil-row { display: flex; align-items: center; gap: 15px; } .profil-img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid #ddd; } .periode { font-size: 14px; color: #555; } /*** KPI GRID ***/ .kpi-grid { display: flex; justify-content: space-between; margin-top: 20px; } .kpi-item { background: #f8f9fc; padding: 15px; border-radius: 10px; width: 30%; text-align: center; } .kpi-item h5 { margin-bottom: 5px; } .kpi-item p { font-size: 22px; font-weight: bold; color: #2a7ae4; } /*** COMMENTAIRE ***/ .comment-section { margin-top: 20px; } 
+.generated-date { margin-top: 15px; text-align: right; font-size: 13px; color: gray;}
+
+.suggestion-card {
+  background: #f1f9ff;
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 20px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+}
+
+.suggestion-card ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.suggestion-card li {
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
 </style>
