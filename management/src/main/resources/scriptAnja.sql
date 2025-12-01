@@ -388,72 +388,72 @@ INSERT INTO poste_competence (id_poste, id_competence, niveau_attendu) VALUES
 ('P-DEVSR', 2, 4),
 ('P-RH', 6, 4);
 
--- CREATE TABLE role (
---     id_role VARCHAR(50) PRIMARY KEY,
---     libelle VARCHAR(50) -- ex: Employe, Manager, RH, Admin
--- );
+CREATE TABLE role (
+    id_role VARCHAR(50) PRIMARY KEY,
+    libelle VARCHAR(50) -- ex: Employe, Manager, RH, Admin
+);
 
--- CREATE TABLE utilisateur (
---     id_utilisateur VARCHAR(50) PRIMARY KEY,
---     id_employe VARCHAR(50),
---     login VARCHAR(50) UNIQUE,
---     mot_de_passe VARCHAR(255),
---     id_role VARCHAR(50),
---     date_creation DATETIME DEFAULT NOW(),
---     actif BOOLEAN DEFAULT TRUE,
---     FOREIGN KEY (id_employe) REFERENCES employe(id_employe),
---     FOREIGN KEY (id_role) REFERENCES role(id_role)
--- );
+CREATE TABLE utilisateur (
+    id_utilisateur VARCHAR(50) PRIMARY KEY,
+    id_employe VARCHAR(50),
+    login VARCHAR(50) UNIQUE,
+    mot_de_passe VARCHAR(255),
+    id_role VARCHAR(50),
+    date_creation DATETIME DEFAULT NOW(),
+    actif BOOLEAN DEFAULT TRUE,
+    FOREIGN KEY (id_employe) REFERENCES employe(id_employe),
+    FOREIGN KEY (id_role) REFERENCES role(id_role)
+);
 
--- CREATE TABLE audit_log (
---     id_audit VARCHAR(50) PRIMARY KEY,
---     id_utilisateur VARCHAR(50),
---     action VARCHAR(255),        -- Ex: Création contrat, Modification employé
---     table_affectee VARCHAR(50), -- Nom de la table affectée
---     id_record VARCHAR(50),      -- ID du record affecté
---     date_action DATETIME DEFAULT NOW(),
---     details TEXT,               -- JSON ou texte pour détails complémentaires
---     FOREIGN KEY (id_utilisateur) REFERENCES utilisateur(id_utilisateur)
--- );
+CREATE TABLE audit_log (
+    id_audit VARCHAR(50) PRIMARY KEY,
+    id_utilisateur VARCHAR(50),
+    action VARCHAR(255),        -- Ex: Création contrat, Modification employé
+    table_affectee VARCHAR(50), -- Nom de la table affectée
+    id_record VARCHAR(50),      -- ID du record affecté
+    date_action DATETIME DEFAULT NOW(),
+    details TEXT,               -- JSON ou texte pour détails complémentaires
+    FOREIGN KEY (id_utilisateur) REFERENCES utilisateur(id_utilisateur)
+);
 
 
--- CREATE TABLE document_type (
---     id_doc_type VARCHAR(50) PRIMARY KEY,
---     libelle VARCHAR(100),        -- ex: Contrat, Certificat, Attestation
---     obligatoire BOOLEAN DEFAULT TRUE -- si le document est obligatoire pour un employé
--- );
+CREATE TABLE document_type (
+    id_doc_type VARCHAR(50) PRIMARY KEY,
+    libelle VARCHAR(100),        -- ex: Contrat, Certificat, Attestation
+    obligatoire BOOLEAN DEFAULT TRUE -- si le document est obligatoire pour un employé
+);
 
--- CREATE TABLE document_archive (
---     id_doc_archive VARCHAR(50) PRIMARY KEY,
---     id_employe VARCHAR(50),
---     id_doc_type VARCHAR(50),
---     chemin_fichier VARCHAR(255), -- chemin physique ou URL du fichier
---     date_sauvegarde DATETIME DEFAULT NOW(), -- date de sauvegarde dans le système
---     date_expiration DATE,                    -- si applicable (ex: certificat)
---     version INT DEFAULT 1,                   -- version du document
---     commentaire TEXT,                        -- info complémentaire
---     sauvegarde_legale BOOLEAN DEFAULT TRUE,  -- indique si c'est archivé légalement
---     FOREIGN KEY (id_employe) REFERENCES employe(id_employe),
---     FOREIGN KEY (id_doc_type) REFERENCES document_type(id_doc_type)
--- );
+CREATE TABLE document_archive (
+    id_doc_archive VARCHAR(50) PRIMARY KEY,
+    id_employe VARCHAR(50),
+    id_doc_type VARCHAR(50),
+    chemin_fichier VARCHAR(255), -- chemin physique ou URL du fichier
+    date_sauvegarde DATETIME DEFAULT NOW(), -- date de sauvegarde dans le système
+    date_expiration DATE,                    -- si applicable (ex: certificat)
+    version INT DEFAULT 1,                   -- version du document
+    commentaire TEXT,                        -- info complémentaire
+    sauvegarde_legale BOOLEAN DEFAULT TRUE,  -- indique si c'est archivé légalement
+    FOREIGN KEY (id_employe) REFERENCES employe(id_employe),
+    FOREIGN KEY (id_doc_type) REFERENCES document_type(id_doc_type)
+);
 
--- INSERT INTO role (id_role, libelle) VALUES
--- ('R-EMP', 'Employe'),
--- ('R-MGR', 'Manager'),
--- ('R-RH', 'RH'),
--- ('R-ADM', 'Admin');
+INSERT INTO role (id_role, libelle) VALUES
+('R-EMP', 'Employe'),
+('R-MGR', 'Manager'),
+('R-RH', 'RH'),
+('R-ADM', 'Admin');
 
--- INSERT INTO utilisateur (id_utilisateur, id_employe, login, mot_de_passe, id_role, actif)
--- VALUES
--- ('U-001', 'EMP001', 'alice', '1234', 'R-EMP', TRUE),
--- ('U-002', 'EMP002', 'benoit', '1234', 'R-MGR', TRUE),
--- ('U-003', 'EMP003', 'claire', '1234', 'R-RH', TRUE),
--- ('U-004', 'EMP004', 'admin', 'admin', 'R-ADM', TRUE);
+INSERT INTO utilisateur (id_utilisateur, id_employe, login, mot_de_passe, id_role, actif)
+VALUES
+('U-001', 'EMP001', 'alice', '1234', 'R-EMP', TRUE),
+('U-002', 'EMP002', 'benoit', '1234', 'R-MGR', TRUE),
+('U-003', 'EMP003', 'claire', '1234', 'R-RH', TRUE),
+('U-004', 'EMP004', 'admin', 'admin', 'R-ADM', TRUE);
 
--- INSERT INTO audit_log (id_audit, id_utilisateur, action, table_affectee, id_record, date_action)
--- VALUES
--- ('AUD-001', 'U-003', 'Creation d un employe', 'employe', 'EMP010', NOW()),
--- ('AUD-002', 'U-002', 'Modification fiche employe', 'employe', 'EMP002', NOW()),
--- ('AUD-003', 'U-004', 'Suppression contrat', 'contrat', 'CT-005', NOW()),
--- ('AUD-004', 'U-001', 'Consultation formations', 'formation', NULL, NOW());
+INSERT INTO audit_log (id_audit, id_utilisateur, action, table_affectee, id_record, date_action)
+VALUES
+('AUD-001', 'U-003', 'Creation d un employe', 'employe', 'EMP010', NOW()),
+('AUD-002', 'U-002', 'Modification fiche employe', 'employe', 'EMP002', NOW()),
+('AUD-003', 'U-004', 'Suppression contrat', 'contrat', 'CT-005', NOW()),
+('AUD-004', 'U-001', 'Consultation formations', 'formation', NULL, NOW());
 
