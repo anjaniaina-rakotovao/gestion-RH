@@ -33,87 +33,84 @@ export default {
       </div>
 
       <div class="nav-menu">
-        <router-link to="/" class="nav-link" :class="{ active: $route.path === '/' }"
-          :title="sidebarCollapsed ? 'Accueil' : ''">
-          <span class="nav-icon">📋</span>
-          <span class="nav-text" v-if="!sidebarCollapsed">Accueil</span>
-        </router-link>
+        <!-- Updated with proper icons -->
+<router-link to="/" class="nav-link" :class="{ active: $route.path === '/' }"
+  :title="sidebarCollapsed ? 'Accueil' : ''">
+  <span class="nav-icon">🏠</span>
+  <span class="nav-text" v-if="!sidebarCollapsed">Accueil</span>
+</router-link>
 
-        <router-link to="/" class="nav-link" :class="{ active: $route.path === '/recherche' }"
-          :title="sidebarCollapsed ? 'Recherche' : ''">
-          <span class="nav-icon">🔍</span>
-          <span class="nav-text" v-if="!sidebarCollapsed">Recherche</span>
-        </router-link>
+<router-link to="/" class="nav-link" :class="{ active: $route.path === '/recherche' }"
+  :title="sidebarCollapsed ? 'Recherche' : ''">
+  <span class="nav-icon">🔍</span>
+  <span class="nav-text" v-if="!sidebarCollapsed">Recherche</span>
+</router-link>
 
-        <router-link to="/statistiques/demographiques" class="nav-link"
-          :class="{ active: $route.path === '/statistiques/demographiques' }"
-          :title="sidebarCollapsed ? 'Statistiques' : ''">
-          <span class="nav-icon">📊</span>
-          <span class="nav-text" v-if="!sidebarCollapsed">Statistiques</span>
-        </router-link>
+<router-link to="/statistiques/demographiques" class="nav-link"
+  :class="{ active: $route.path === '/statistiques/demographiques' }"
+  :title="sidebarCollapsed ? 'Statistiques' : ''">
+  <span class="nav-icon">📊</span>
+  <span class="nav-text" v-if="!sidebarCollapsed">Statistiques</span>
+</router-link>
 
-        <router-link to="/statistiques/turnover-absenteisme" class="nav-link"
-          :class="{ active: $route.path === '/statistiques/turnover-absenteisme' }"
-          :title="sidebarCollapsed ? 'Turnover & Absentéisme' : ''">
-          <span class="nav-icon">📈</span>
-          <span class="nav-text" v-if="!sidebarCollapsed">Turnover & Absentéisme</span>
-        </router-link>
+<router-link to="/statistiques/turnover-absenteisme" class="nav-link"
+  :class="{ active: $route.path === '/statistiques/turnover-absenteisme' }"
+  :title="sidebarCollapsed ? 'Turnover & Absentéisme' : ''">
+  <span class="nav-icon">📉</span>
+  <span class="nav-text" v-if="!sidebarCollapsed">Turnover & Absentéisme</span>
+</router-link>
 
-        <router-link to="/statistiques/contrat" class="nav-link"
-          :class="{ active: $route.path === '/statistiques/contrat' }"
-          :title="sidebarCollapsed ? 'Statistiques Contrat' : ''">
-          <span class="nav-icon">📑</span>
-          <span class="nav-text" v-if="!sidebarCollapsed">Statistiques Contrat</span>
-        </router-link>
+<router-link to="/statistiques/contrat" class="nav-link"
+  :class="{ active: $route.path === '/statistiques/contrat' }"
+  :title="sidebarCollapsed ? 'Statistiques Contrat' : ''">
+  <span class="nav-icon">📄</span>
+  <span class="nav-text" v-if="!sidebarCollapsed">Statistiques Contrat</span>
+</router-link>
 
-        <router-link to="/alertes-notifications" class="nav-link"
-          :class="{ active: $route.path === '/alertes-notifications' }" :title="sidebarCollapsed ? 'Alertes' : ''">
-          <span class="nav-icon">🚨</span>
-          <span class="nav-text" v-if="!sidebarCollapsed">Alertes & Notifications</span>
-        </router-link>
+<router-link to="/alertes-notifications" class="nav-link"
+  :class="{ active: $route.path === '/alertes-notifications' }" :title="sidebarCollapsed ? 'Alertes' : ''">
+  <span class="nav-icon">🔔</span>
+  <span class="nav-text" v-if="!sidebarCollapsed">Alertes & Notifications</span>
+</router-link>
 
-        <router-link to="/fiche-paie" class="nav-link" :class="{ active: $route.path === '/fiche-paie' }"
-          :title="sidebarCollapsed ? 'Fiches de Paie' : ''">
-          <span class="nav-icon">💰</span>
-          <span class="nav-text" v-if="!sidebarCollapsed">Fiches de Paie</span>
-        </router-link>
+<router-link to="/fiche-paie" class="nav-link" :class="{ active: $route.path === '/fiche-paie' }"
+  :title="sidebarCollapsed ? 'Fiches de Paie' : ''">
+  <span class="nav-icon">💰</span>
+  <span class="nav-text" v-if="!sidebarCollapsed">Fiches de Paie</span>
+</router-link>
 
-        <router-link to="/dashboard" class="nav-link"
-          :class="{ active: $route.path === '/dashboard' }"> 
-          <span class="nav-icon">📅</span>
-          <span class="nav-text" v-if="!sidebarCollapsed">Planning des congés</span>
-        </router-link>
-          
-        <router-link to="/presences" class="nav-link"
-          :class="{ active: $route.path === '/presences' }">
-          <span class="nav-icon">🕒</span>
-          <span class="nav-text" v-if="!sidebarCollapsed">Présences</span>
-        </router-link>
+<router-link to="/dashboard" class="nav-link"
+  :class="{ active: $route.path === '/dashboard' }"> 
+  <span class="nav-icon">📅</span>
+  <span class="nav-text" v-if="!sidebarCollapsed">Planning des congés</span>
+</router-link>
+  
+<router-link to="/presences" class="nav-link"
+  :class="{ active: $route.path === '/presences' }">
+  <span class="nav-icon">👥</span>
+  <span class="nav-text" v-if="!sidebarCollapsed">Présences</span>
+</router-link>
 
-        <router-link to="/conges" class="nav-link" :class="{ active: $route.path === '/conges' }">
-          <span class="nav-icon">📝</span>
-          <span class="nav-text" v-if="!sidebarCollapsed">Demander un congé</span>
-        </router-link>
+<router-link to="/conges" class="nav-link" :class="{ active: $route.path === '/conges' }">
+  <span class="nav-icon">✈️</span>
+  <span class="nav-text" v-if="!sidebarCollapsed">Demander un congé</span>
+</router-link>
 
-        <router-link to="/conges/attente" class="nav-link" :class="{ active: $route.path === '/conges/attente' }">
-          <span class="nav-icon">⏲️</span>
-          <span class="nav-text" v-if="!sidebarCollapsed">Liste congés en attente</span>
-        </router-link>
+<!-- Updated icons for the problematic items -->
+<router-link to="/conges/attente" class="nav-link" :class="{ active: $route.path === '/conges/attente' }">
+  <span class="nav-icon">⏳</span>
+  <span class="nav-text" v-if="!sidebarCollapsed">Liste congés en attente</span>
+</router-link>
 
-        <router-link to="/scoringPage" class="nav-link" :class="{ active: $route.path === '/scoringPage' }">
-          <span class="nav-icon">⏲️</span>
-          <span class="nav-text" v-if="!sidebarCollapsed">Gestion des performances</span>
-        </router-link>
+<router-link to="/scoringPage" class="nav-link" :class="{ active: $route.path === '/scoringPage' }">
+  <span class="nav-icon">⭐</span>
+  <span class="nav-text" v-if="!sidebarCollapsed">Gestion des performances</span>
+</router-link>
 
-          <router-link to="/genererRapport" class="nav-link" :class="{ active: $route.path === '/genererRapport' }">
-          <span class="nav-icon">⏲️</span>
-          <span class="nav-text" v-if="!sidebarCollapsed">Générer Rapport</span>
-        </router-link>
-
-         <router-link to="/competence" class="nav-link" :class="{ active: $route.path === '/competence' }">
-          <span class="nav-icon">⏲️</span>
-          <span class="nav-text" v-if="!sidebarCollapsed">Gestion Compétences</span>
-        </router-link>
+<router-link to="/competence" class="nav-link" :class="{ active: $route.path === '/competence' }">
+  <span class="nav-icon">🎯</span>
+  <span class="nav-text" v-if="!sidebarCollapsed">Gestion Compétences</span>
+</router-link>
 
         
       </div>

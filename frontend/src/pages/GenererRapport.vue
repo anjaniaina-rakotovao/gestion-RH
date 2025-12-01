@@ -1,4 +1,6 @@
 <template>
+    <Navbar />
+
   <div class="p-6 max-w-3xl mx-auto">
     <h1 class="text-2xl font-bold mb-4">Génération du Rapport de Performance</h1>
 
@@ -72,6 +74,8 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import jsPDF from 'jspdf'
+import Navbar from "@/pages/NavBarPerformance.vue"; 
+
 
 const idEmploye = ref('')
 const month = ref(new Date().getMonth() + 1)
