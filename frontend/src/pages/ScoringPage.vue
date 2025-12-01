@@ -1,5 +1,7 @@
 <template>
+  <Navbar />
   <div class="p-6">
+
     <h1 class="text-2xl font-bold mb-4">Scores des employés</h1>
 
     <!-- Formulaire unique -->
@@ -62,6 +64,8 @@
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import { Chart, LineController, LineElement, PointElement, CategoryScale, LinearScale, Title, Tooltip, Legend } from 'chart.js'
+import Navbar from "@/pages/NavBarPerformance.vue"; 
+
 
 Chart.register(LineController, LineElement, PointElement, CategoryScale, LinearScale, Title, Tooltip, Legend)
 
