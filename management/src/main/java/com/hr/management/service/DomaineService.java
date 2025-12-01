@@ -18,4 +18,6 @@ public class DomaineService {
     public List<Domaine> findAllDomaine(){
         return domaineRepository.findAll();
     }
+
+    
 }

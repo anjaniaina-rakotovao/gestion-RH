@@ -145,3 +145,25 @@ CREATE TABLE histo_salaire (
     montant_net DECIMAL(10, 2),
     FOREIGN KEY (id_employe) REFERENCES employe(id_employe)
 );
+
+create table cnaps(
+    id_cnaps INT PRIMARY KEY,
+    valeur DOUBLE,
+    date DATE,
+    status VARCHAR(50) 
+);
+
+create table ostie(
+    id_ostie INT PRIMARY KEY,
+    valeur DOUBLE,
+    date Date,
+    status VARCHAR(50) 
+);
+
+create table irsa(
+    id_irsa INT PRIMARY KEY,
+    montant_min DOUBLE,
+    montant_max DOUBLE,
+    taux DECIMAL(5,2),
+    date DATE
+);

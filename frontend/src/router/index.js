@@ -13,6 +13,8 @@ import Dashboard from "../views/Dashboard.vue";
 import PresenceList from "../views/PresenceList.vue";
 import DemandeConge from "../views/DemandeConge.vue";
 import PendingLeaves from "../views/PendingLeaves.vue";
+import PresenceForm from '../components/PresenceForm.vue';
+import AttendanceSummary from '../components/AttendanceSummary.vue'
 
 const routes = [
     {
@@ -72,8 +74,19 @@ const routes = [
     { path: "/dashboard", name: "dashboard", component: Dashboard },
     { path: "/presences", name: "presences", component: PresenceList },
     { path: "/conges", name: "conges", component: DemandeConge },
-    {path: '/conges/attente', name: "conges attente", component: PendingLeaves }
-
+    {path: '/conges/attente', name: "conges attente", component: PendingLeaves },
+    {
+        path: '/presence/formulaire',
+        name: 'PresenceForm',
+        component: PresenceForm,
+        props: true
+    },
+    {
+        path: '/presence/Attendance',
+        name: 'AttendanceSummary',
+        component: AttendanceSummary,
+        props: true
+    },
 ]
 
 const router = createRouter({

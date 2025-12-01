@@ -23,4 +23,13 @@ public interface EmployeRepository extends JpaRepository<Employe, String> {
     List<Employe> findByNomAndPrenom(@Param("nom") String nom, @Param("prenom") String prenom);
 
     Employe findByMail(String mail);
+
+    @Query("""
+        SELECT e FROM Employe e
+        JOIN EmployePoste ep ON e.idEmploye = ep.employe.idEmploye
+        JOIN Poste p ON ep.poste.idPoste = p.idPoste
+        WHERE p.domaine.idDomaine = :idDomaine
+    """)
+    List<Employe> findByDomaine(@Param("idDomaine") String idDomaine);
+
 }

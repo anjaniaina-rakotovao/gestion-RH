@@ -1,7 +1,10 @@
 package com.hr.management.entities;
 
 import jakarta.persistence.*;
+
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "domaine")
@@ -13,6 +16,7 @@ public class Domaine {
     private String libelle;
 
     @OneToMany(mappedBy = "domaine")
+    @JsonIgnore
     private List<Poste> postes;
 
     public Domaine(String idDomaine, String libelle, List<Poste> postes) {

@@ -99,6 +99,17 @@ export default {
           <span class="nav-icon">⏲️</span>
           <span class="nav-text" v-if="!sidebarCollapsed">Liste congés en attente</span>
         </router-link>
+
+        <router-link to="/presence/formulaire" class="nav-link" :class="{ active: $route.path === '/presence/formulaire' }">
+          <span class="nav-icon">📅</span>
+          <span class="nav-text" v-if="!sidebarCollapsed">Pointage</span>
+        </router-link>
+
+        
+        <router-link to="/presence/Attendance" class="nav-link" :class="{ active: $route.path === '/presence/Attendance' }">
+          <span class="nav-icon">📅</span>
+          <span class="nav-text" v-if="!sidebarCollapsed">Resume de présence</span>
+        </router-link>
       </div>
 
       <div class="sidebar-footer" v-if="!sidebarCollapsed">
